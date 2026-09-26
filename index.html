@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>AHR Utility Tracker</title>
+
+  <meta name="theme-color" content="#0ea5e9">
+  <meta name="description" content="Personal Gas, Current, Rent and Service Charge Tracker">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-icon">AHR</div>
+    <div>
+      <h1>AHR Utility Tracker</h1>
+      <span>Personal Expense & Utility Manager</span>
+    </div>
+  </div>
+
+  <div class="top-actions">
+    <button id="themeBtn" class="icon-btn">🌙</button>
+    <button id="exportBtn" class="small-btn">⬇ Backup</button>
+
+    <label class="small-btn import-btn">
+      ⬆ Restore
+      <input type="file" id="importFile" accept=".json" hidden>
+    </label>
+  </div>
+</header>
+
+
+<main class="container">
+
+  <!-- Dashboard -->
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow">PERSONAL DASHBOARD</p>
+      <h2>Utility overview</h2>
+      <p id="todayText"></p>
+    </div>
+
+    <button class="primary-btn" onclick="openModal('gas')">
+      + Add Record
+    </button>
+  </section>
+
+
+  <section class="stats-grid">
+
+    <div class="stat-card gas">
+      <div class="stat-top">
+        <span>🔥</span>
+        <small>GAS</small>
+      </div>
+      <h3 id="gasDays">0 days</h3>
+      <p id="gasStatus">No active gas</p>
+      <strong id="gasCost">৳0</strong>
+    </div>
+
+    <div class="stat-card current">
+      <div class="stat-top">
+        <span>⚡</span>
+        <small>CURRENT / CARD</small>
+      </div>
+      <h3 id="currentDays">0 days</h3>
+      <p id="currentStatus">No active recharge</p>
+      <strong id="currentCost">৳0</strong>
+    </div>
+
+    <div class="stat-card rent">
+      <div class="stat-top">
+        <span>🏠</span>
+        <small>RENT</small>
+      </div>
+      <h3 id="rentAmount">৳0</h3>
+      <p id="rentStatus">No rent record</p>
+      <strong id="rentMonth">—</strong>
+    </div>
+
+    <div class="stat-card service">
+      <div class="stat-top">
+        <span>🛠️</span>
+        <small>SERVICE</small>
+      </div>
+      <h3 id="serviceAmount">৳0</h3>
+      <p id="serviceStatus">No service charge</p>
+      <strong id="serviceMonth">—</strong>
+    </div>
+
+  </section>
+
+
+  <!-- Total -->
+
+  <section class="total-card">
+    <div>
+      <span>Total tracked expense</span>
+      <h2 id="totalExpense">৳0</h2>
+    </div>
+
+    <div class="total-meta">
+      <span>This month</span>
+      <strong id="monthExpense">৳0</strong>
+    </div>
+  </section>
+
+
+  <!-- Quick actions -->
+
+  <section class="section">
+
+    <div class="section-title">
+      <div>
+        <h2>Quick Add</h2>
+        <p>Add your monthly records quickly.</p>
+      </div>
+    </div>
+
+    <div class="quick-grid">
+
+      <button class="quick-btn" onclick="openModal('gas')">
+        <span>🔥</span>
+        <b>Add Gas</b>
+        <small>Gas purchase</small>
+      </button>
+
+      <button class="quick-btn" onclick="openModal('current')">
+        <span>⚡</span>
+        <b>Add Current</b>
+        <small>Card recharge</small>
+      </button>
+
+      <button class="quick-btn" onclick="openModal('rent')">
+        <span>🏠</span>
+        <b>Add Rent</b>
+        <small>Monthly rent</small>
+      </button>
+
+      <button class="quick-btn" onclick="openModal('service')">
+        <span>🛠️</span>
+        <b>Add Service</b>
+        <small>Service charge</small>
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- Monthly summary -->
+
+  <section class="section">
+
+    <div class="section-title">
+      <div>
+        <h2>Monthly Summary</h2>
+        <p>Current month expense breakdown.</p>
+      </div>
+
+      <select id="monthFilter" class="select">
+      </select>
+    </div>
+
+    <div class="summary-grid">
+
+      <div class="summary-box">
+        <span>🔥 Gas</span>
+        <strong id="summaryGas">৳0</strong>
+      </div>
+
+      <div class="summary-box">
+        <span>⚡ Current</span>
+        <strong id="summaryCurrent">৳0</strong>
+      </div>
+
+      <div class="summary-box">
+        <span>🏠 Rent</span>
+        <strong id="summaryRent">৳0</strong>
+      </div>
+
+      <div class="summary-box">
+        <span>🛠️ Service</span>
+        <strong id="summaryService">৳0</strong>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- History -->
+
+  <section class="section">
+
+    <div class="section-title">
+      <div>
+        <h2>History</h2>
+        <p>All your previous records.</p>
+      </div>
+
+      <select id="typeFilter" class="select">
+        <option value="all">All Records</option>
+        <option value="gas">🔥 Gas</option>
+        <option value="current">⚡ Current</option>
+        <option value="rent">🏠 Rent</option>
+        <option value="service">🛠️ Service</option>
+      </select>
+    </div>
+
+    <div id="historyList" class="history-list"></div>
+
+  </section>
+
+
+  <footer>
+    <b>AHR Utility Tracker</b>
+    <span>Made for personal use • Data stored locally</span>
+  </footer>
+
+</main>
+
+
+<!-- Modal -->
+
+<div id="modal" class="modal">
+
+  <div class="modal-box">
+
+    <button class="close-btn" onclick="closeModal()">×</button>
+
+    <div class="modal-head">
+      <span id="modalIcon">🔥</span>
+
+      <div>
+        <h2 id="modalTitle">Add Gas</h2>
+        <p id="modalDescription">Track gas usage.</p>
+      </div>
+    </div>
+
+
+    <form id="recordForm">
+
+      <input type="hidden" id="recordType">
+
+      <div class="form-group">
+        <label id="amountLabel">Amount</label>
+        <input
+          type="number"
+          id="amount"
+          min="0"
+          step="0.01"
+          placeholder="e.g. 1250"
+          required
+        >
+      </div>
+
+
+      <div class="form-row">
+
+        <div class="form-group">
+          <label id="startLabel">Start / Purchase Date</label>
+          <input type="date" id="startDate" required>
+        </div>
+
+        <div class="form-group">
+          <label id="endLabel">End Date</label>
+          <input type="date" id="endDate">
+        </div>
+
+      </div>
+
+
+      <div class="form-group" id="monthGroup">
+        <label>Month</label>
+        <input type="month" id="recordMonth">
+      </div>
+
+
+      <div class="form-group">
+        <label>Note</label>
+        <textarea
+          id="note"
+          rows="3"
+          placeholder="Optional note..."
+        ></textarea>
+      </div>
+
+
+      <div class="form-group checkbox-row" id="paidGroup">
+
+        <input type="checkbox" id="paid">
+
+        <label for="paid">
+          Mark as Paid
+        </label>
+
+      </div>
+
+
+      <button class="submit-btn" type="submit">
+        Save Record
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<div id="toast"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
