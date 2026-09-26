@@ -7,146 +7,301 @@
   <title>AHR Utility Tracker</title>
 
   <meta name="theme-color" content="#0ea5e9">
-  <meta name="description" content="Personal Gas, Current, Rent and Service Charge Tracker">
 
   <link rel="stylesheet" href="style.css">
+
+  <!-- PDF LIBRARIES -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.3/jspdf.plugin.autotable.min.js"></script>
 </head>
 
 <body>
 
 <header class="topbar">
+
   <div class="brand">
-    <div class="brand-icon">AHR</div>
+
+    <div class="brand-icon">
+      AHR
+    </div>
+
     <div>
       <h1>AHR Utility Tracker</h1>
       <span>Personal Expense & Utility Manager</span>
     </div>
+
   </div>
 
   <div class="top-actions">
-    <button id="themeBtn" class="icon-btn">🌙</button>
-    <button id="exportBtn" class="small-btn">⬇ Backup</button>
+
+    <button id="themeBtn" class="icon-btn">
+      🌙
+    </button>
+
+    <button id="exportBtn" class="small-btn">
+      ⬇ Backup
+    </button>
 
     <label class="small-btn import-btn">
       ⬆ Restore
-      <input type="file" id="importFile" accept=".json" hidden>
+      <input
+        type="file"
+        id="importFile"
+        accept=".json"
+        hidden
+      >
     </label>
+
   </div>
+
 </header>
 
 
 <main class="container">
 
-  <!-- Dashboard -->
+  <!-- HERO -->
 
   <section class="hero">
+
     <div>
-      <p class="eyebrow">PERSONAL DASHBOARD</p>
-      <h2>Utility overview</h2>
+
+      <p class="eyebrow">
+        PERSONAL DASHBOARD
+      </p>
+
+      <h2>
+        Utility overview
+      </h2>
+
       <p id="todayText"></p>
+
     </div>
 
-    <button class="primary-btn" onclick="openModal('gas')">
+    <button
+      class="primary-btn"
+      onclick="openModal('gas')"
+    >
       + Add Record
     </button>
+
   </section>
 
+
+  <!-- STAT CARDS -->
 
   <section class="stats-grid">
 
     <div class="stat-card gas">
+
       <div class="stat-top">
         <span>🔥</span>
         <small>GAS</small>
       </div>
-      <h3 id="gasDays">0 days</h3>
-      <p id="gasStatus">No active gas</p>
-      <strong id="gasCost">৳0</strong>
+
+      <h3 id="gasDays">
+        0 days
+      </h3>
+
+      <p id="gasStatus">
+        No active gas
+      </p>
+
+      <strong id="gasCost">
+        ৳0
+      </strong>
+
     </div>
 
+
     <div class="stat-card current">
+
       <div class="stat-top">
         <span>⚡</span>
         <small>CURRENT / CARD</small>
       </div>
-      <h3 id="currentDays">0 days</h3>
-      <p id="currentStatus">No active recharge</p>
-      <strong id="currentCost">৳0</strong>
+
+      <h3 id="currentDays">
+        0 days
+      </h3>
+
+      <p id="currentStatus">
+        No active recharge
+      </p>
+
+      <strong id="currentCost">
+        ৳0
+      </strong>
+
     </div>
 
+
     <div class="stat-card rent">
+
       <div class="stat-top">
         <span>🏠</span>
         <small>RENT</small>
       </div>
-      <h3 id="rentAmount">৳0</h3>
-      <p id="rentStatus">No rent record</p>
-      <strong id="rentMonth">—</strong>
+
+      <h3 id="rentAmount">
+        ৳0
+      </h3>
+
+      <p id="rentStatus">
+        No rent record
+      </p>
+
+      <strong id="rentMonth">
+        —
+      </strong>
+
     </div>
 
+
     <div class="stat-card service">
+
       <div class="stat-top">
         <span>🛠️</span>
         <small>SERVICE</small>
       </div>
-      <h3 id="serviceAmount">৳0</h3>
-      <p id="serviceStatus">No service charge</p>
-      <strong id="serviceMonth">—</strong>
+
+      <h3 id="serviceAmount">
+        ৳0
+      </h3>
+
+      <p id="serviceStatus">
+        No service charge
+      </p>
+
+      <strong id="serviceMonth">
+        —
+      </strong>
+
     </div>
 
   </section>
 
 
-  <!-- Total -->
+  <!-- TOTAL -->
 
   <section class="total-card">
+
     <div>
-      <span>Total tracked expense</span>
-      <h2 id="totalExpense">৳0</h2>
+
+      <span>
+        Total tracked expense
+      </span>
+
+      <h2 id="totalExpense">
+        ৳0
+      </h2>
+
     </div>
 
     <div class="total-meta">
-      <span>This month</span>
-      <strong id="monthExpense">৳0</strong>
+
+      <span>
+        This month
+      </span>
+
+      <strong id="monthExpense">
+        ৳0
+      </strong>
+
     </div>
+
   </section>
 
 
-  <!-- Quick actions -->
+  <!-- QUICK ADD -->
 
   <section class="section">
 
     <div class="section-title">
+
       <div>
-        <h2>Quick Add</h2>
-        <p>Add your monthly records quickly.</p>
+        <h2>
+          Quick Add
+        </h2>
+
+        <p>
+          Add your monthly records quickly.
+        </p>
       </div>
+
     </div>
+
 
     <div class="quick-grid">
 
-      <button class="quick-btn" onclick="openModal('gas')">
+      <button
+        class="quick-btn"
+        onclick="openModal('gas')"
+      >
+
         <span>🔥</span>
-        <b>Add Gas</b>
-        <small>Gas purchase</small>
+
+        <b>
+          Add Gas
+        </b>
+
+        <small>
+          Gas purchase
+        </small>
+
       </button>
 
-      <button class="quick-btn" onclick="openModal('current')">
+
+      <button
+        class="quick-btn"
+        onclick="openModal('current')"
+      >
+
         <span>⚡</span>
-        <b>Add Current</b>
-        <small>Card recharge</small>
+
+        <b>
+          Add Current
+        </b>
+
+        <small>
+          Card recharge
+        </small>
+
       </button>
 
-      <button class="quick-btn" onclick="openModal('rent')">
+
+      <button
+        class="quick-btn"
+        onclick="openModal('rent')"
+      >
+
         <span>🏠</span>
-        <b>Add Rent</b>
-        <small>Monthly rent</small>
+
+        <b>
+          Add Rent
+        </b>
+
+        <small>
+          Monthly rent
+        </small>
+
       </button>
 
-      <button class="quick-btn" onclick="openModal('service')">
+
+      <button
+        class="quick-btn"
+        onclick="openModal('service')"
+      >
+
         <span>🛠️</span>
-        <b>Add Service</b>
-        <small>Service charge</small>
+
+        <b>
+          Add Service
+        </b>
+
+        <small>
+          Service charge
+        </small>
+
       </button>
 
     </div>
@@ -154,40 +309,265 @@
   </section>
 
 
-  <!-- Monthly summary -->
+  <!-- PDF REPORT -->
+
+  <section class="section report-section">
+
+    <div class="section-title">
+
+      <div>
+
+        <h2>
+          📄 PDF Reports
+        </h2>
+
+        <p>
+          Generate detailed expense reports.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="report-card">
+
+      <div class="report-icon">
+        📊
+      </div>
+
+
+      <div class="report-controls">
+
+        <div class="report-field">
+
+          <label>
+            Report Type
+          </label>
+
+          <select id="reportMode">
+
+            <option value="months">
+              1–12 Months
+            </option>
+
+            <option value="custom">
+              Custom Date Range
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div
+          class="report-field"
+          id="reportYearBox"
+        >
+
+          <label>
+            Year
+          </label>
+
+          <select id="reportYear">
+          </select>
+
+        </div>
+
+
+        <div
+          class="report-field"
+          id="reportMonthsBox"
+        >
+
+          <label>
+            Number of Months
+          </label>
+
+          <select id="reportMonths">
+
+            <option value="1">
+              1 Month
+            </option>
+
+            <option value="2">
+              2 Months
+            </option>
+
+            <option value="3">
+              3 Months
+            </option>
+
+            <option value="4">
+              4 Months
+            </option>
+
+            <option value="5">
+              5 Months
+            </option>
+
+            <option value="6">
+              6 Months
+            </option>
+
+            <option value="7">
+              7 Months
+            </option>
+
+            <option value="8">
+              8 Months
+            </option>
+
+            <option value="9">
+              9 Months
+            </option>
+
+            <option value="10">
+              10 Months
+            </option>
+
+            <option value="11">
+              11 Months
+            </option>
+
+            <option value="12" selected>
+              12 Months
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div
+          class="custom-date-box"
+          id="customDateBox"
+        >
+
+          <div class="report-field">
+
+            <label>
+              From Date
+            </label>
+
+            <input
+              type="date"
+              id="reportFrom"
+            >
+
+          </div>
+
+
+          <div class="report-field">
+
+            <label>
+              To Date
+            </label>
+
+            <input
+              type="date"
+              id="reportTo"
+            >
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="pdf-btn"
+          onclick="generatePDF()"
+        >
+
+          📄 Download PDF Report
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- MONTHLY SUMMARY -->
 
   <section class="section">
 
     <div class="section-title">
+
       <div>
-        <h2>Monthly Summary</h2>
-        <p>Current month expense breakdown.</p>
+
+        <h2>
+          Monthly Summary
+        </h2>
+
+        <p>
+          Current month expense breakdown.
+        </p>
+
       </div>
 
-      <select id="monthFilter" class="select">
+      <select
+        id="monthFilter"
+        class="select"
+      >
       </select>
+
     </div>
+
 
     <div class="summary-grid">
 
       <div class="summary-box">
-        <span>🔥 Gas</span>
-        <strong id="summaryGas">৳0</strong>
+
+        <span>
+          🔥 Gas
+        </span>
+
+        <strong id="summaryGas">
+          ৳0
+        </strong>
+
       </div>
 
-      <div class="summary-box">
-        <span>⚡ Current</span>
-        <strong id="summaryCurrent">৳0</strong>
-      </div>
 
       <div class="summary-box">
-        <span>🏠 Rent</span>
-        <strong id="summaryRent">৳0</strong>
+
+        <span>
+          ⚡ Current
+        </span>
+
+        <strong id="summaryCurrent">
+          ৳0
+        </strong>
+
       </div>
 
+
       <div class="summary-box">
-        <span>🛠️ Service</span>
-        <strong id="summaryService">৳0</strong>
+
+        <span>
+          🏠 Rent
+        </span>
+
+        <strong id="summaryRent">
+          ৳0
+        </strong>
+
+      </div>
+
+
+      <div class="summary-box">
+
+        <span>
+          🛠️ Service
+        </span>
+
+        <strong id="summaryService">
+          ৳0
+        </strong>
+
       </div>
 
     </div>
@@ -195,62 +575,131 @@
   </section>
 
 
-  <!-- History -->
+  <!-- HISTORY -->
 
   <section class="section">
 
     <div class="section-title">
+
       <div>
-        <h2>History</h2>
-        <p>All your previous records.</p>
+
+        <h2>
+          History
+        </h2>
+
+        <p>
+          All your previous records.
+        </p>
+
       </div>
 
-      <select id="typeFilter" class="select">
-        <option value="all">All Records</option>
-        <option value="gas">🔥 Gas</option>
-        <option value="current">⚡ Current</option>
-        <option value="rent">🏠 Rent</option>
-        <option value="service">🛠️ Service</option>
+
+      <select
+        id="typeFilter"
+        class="select"
+      >
+
+        <option value="all">
+          All Records
+        </option>
+
+        <option value="gas">
+          🔥 Gas
+        </option>
+
+        <option value="current">
+          ⚡ Current
+        </option>
+
+        <option value="rent">
+          🏠 Rent
+        </option>
+
+        <option value="service">
+          🛠️ Service
+        </option>
+
       </select>
+
     </div>
 
-    <div id="historyList" class="history-list"></div>
+
+    <div
+      id="historyList"
+      class="history-list"
+    >
+    </div>
 
   </section>
 
 
   <footer>
-    <b>AHR Utility Tracker</b>
-    <span>Made for personal use • Data stored locally</span>
+
+    <b>
+      AHR Utility Tracker
+    </b>
+
+    <span>
+      Made for personal use • Data stored locally
+    </span>
+
   </footer>
 
 </main>
 
 
-<!-- Modal -->
+<!-- ADD RECORD MODAL -->
 
-<div id="modal" class="modal">
+<div
+  id="modal"
+  class="modal"
+>
 
   <div class="modal-box">
 
-    <button class="close-btn" onclick="closeModal()">×</button>
+    <button
+      class="close-btn"
+      onclick="closeModal()"
+    >
+      ×
+    </button>
+
 
     <div class="modal-head">
-      <span id="modalIcon">🔥</span>
+
+      <span id="modalIcon">
+        🔥
+      </span>
 
       <div>
-        <h2 id="modalTitle">Add Gas</h2>
-        <p id="modalDescription">Track gas usage.</p>
+
+        <h2 id="modalTitle">
+          Add Gas
+        </h2>
+
+        <p id="modalDescription">
+          Track gas usage.
+        </p>
+
       </div>
+
     </div>
 
 
     <form id="recordForm">
 
-      <input type="hidden" id="recordType">
+      <input
+        type="hidden"
+        id="recordType"
+      >
+
 
       <div class="form-group">
-        <label id="amountLabel">Amount</label>
+
+        <label id="amountLabel">
+          Amount
+        </label>
+
         <input
           type="number"
           id="amount"
@@ -259,43 +708,84 @@
           placeholder="e.g. 1250"
           required
         >
+
       </div>
 
 
       <div class="form-row">
 
         <div class="form-group">
-          <label id="startLabel">Start / Purchase Date</label>
-          <input type="date" id="startDate" required>
+
+          <label id="startLabel">
+            Start / Purchase Date
+          </label>
+
+          <input
+            type="date"
+            id="startDate"
+            required
+          >
+
         </div>
 
+
         <div class="form-group">
-          <label id="endLabel">End Date</label>
-          <input type="date" id="endDate">
+
+          <label id="endLabel">
+            End Date
+          </label>
+
+          <input
+            type="date"
+            id="endDate"
+          >
+
         </div>
 
       </div>
 
 
-      <div class="form-group" id="monthGroup">
-        <label>Month</label>
-        <input type="month" id="recordMonth">
+      <div
+        class="form-group"
+        id="monthGroup"
+      >
+
+        <label>
+          Month
+        </label>
+
+        <input
+          type="month"
+          id="recordMonth"
+        >
+
       </div>
 
 
       <div class="form-group">
-        <label>Note</label>
+
+        <label>
+          Note
+        </label>
+
         <textarea
           id="note"
           rows="3"
           placeholder="Optional note..."
         ></textarea>
+
       </div>
 
 
-      <div class="form-group checkbox-row" id="paidGroup">
+      <div
+        class="form-group checkbox-row"
+        id="paidGroup"
+      >
 
-        <input type="checkbox" id="paid">
+        <input
+          type="checkbox"
+          id="paid"
+        >
 
         <label for="paid">
           Mark as Paid
@@ -304,7 +794,10 @@
       </div>
 
 
-      <button class="submit-btn" type="submit">
+      <button
+        class="submit-btn"
+        type="submit"
+      >
         Save Record
       </button>
 
@@ -316,6 +809,7 @@
 
 
 <div id="toast"></div>
+
 
 <script src="script.js"></script>
 
